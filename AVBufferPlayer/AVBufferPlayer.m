@@ -6,25 +6,39 @@
 	AVAudioPlayer *_audioPlayer;
 }
 
-- (id)initWithBuffer:(float *)buffer frames:(int)frames
+
+- (id)initWithBuffer:(float *)buffer frames:(int)frames {
+    return [self initWithBuffer:buffer frames:frames channels:1];
+}
+
+- (id)initWithBuffer:(float *)buffer frames:(int)frames channels:(int)channels
 {
 	if ((self = [super init]))
 	{
+		if (channels < 1 || channels > 2)
+		{
+		    NSLog(@"'channels' must be 1 (mono) or 2 (stereo)");
+		    return nil;
+		}
+	    
 		// AVAudioPlayer will only play formats it knows. It cannot play raw
 		// audio data, so we will convert the raw floating point values into
 		// a 16-bit WAV file.
 
-		unsigned int payloadSize = frames * sizeof(SInt16);  // byte size of waveform data
+		unsigned int payloadSize = frames * channels * sizeof(SInt16);  // byte size of waveform data
 		unsigned int wavSize = 44 + payloadSize;             // total byte size
 
 		// Allocate a memory buffer that will hold the WAV header and the
 		// waveform bytes.
-		SInt8 *wavBuffer = (SInt8 *)malloc(wavSize);
+		wavBuffer = (SInt8 *)malloc(wavSize);
 		if (wavBuffer == NULL)
 		{
 			NSLog(@"Error allocating %u bytes", wavSize);
 			return nil;
 		}
+	    
+		UInt32 bytesPerSample = channels * sizeof(SInt16);
+		UInt32 bytesPerSec = 44100 * bytesPerSample; // 88200 or 176400
 
 		// Fake a WAV header.
 		SInt8 *header = (SInt8 *)wavBuffer;
@@ -46,19 +60,19 @@
 		header[0x13] = 0;
 		header[0x14] = 1;     // 1 = PCM format
 		header[0x15] = 0;
-		header[0x16] = 1;     // number of channels 
+		header[0x16] = channels;     // number of channels
 		header[0x17] = 0;
-		header[0x18] = 0x44;  // samples per sec (44100)    
+		header[0x18] = 0x44;  // samples per sec (44100)
 		header[0x19] = 0xAC;
 		header[0x1A] = 0; 
 		header[0x1B] = 0;
-		header[0x1C] = 0x88;  // bytes per sec (88200)
-		header[0x1D] = 0x58;
-		header[0x1E] = 0x01;
+		header[0x1C] = bytesPerSec & 0xff;  // bytes per sec (88200 or 176400)
+		header[0x1D] = (bytesPerSec >> 8) & 0xff;
+		header[0x1E] = (bytesPerSec >> 16) & 0xff;
 		header[0x1F] = 0;
-		header[0x20] = 2;     // block align (bytes per sample)
+		header[0x20] = bytesPerSample;     // block align (bytes per sample)
 		header[0x21] = 0;
-		header[0x22] = 16;    // bits per sample
+		header[0x22] = 8*bytesPerSample;    // bits per sample
 		header[0x23] = 0;
 		header[0x24] = 'd';
 		header[0x25] = 'a';
@@ -70,7 +84,7 @@
 
 		// Convert the floating point audio data into signed 16-bit.
 		SInt16 *payload = (SInt16 *)(wavBuffer + 44);
-		for (int t = 0; t < frames; ++t)
+		for (int t = 0; t < frames * channels; ++t)
 		{
 			payload[t] = buffer[t] * 0x7fff;
 		}
@@ -100,6 +114,11 @@
 - (void)stop
 {
 	[_audioPlayer stop];
+}
+
+- (void) dealloc
+{
+    if (wavBuffer) free(wavBuffer);
 }
 
 @end
