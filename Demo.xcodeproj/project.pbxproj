@@ -15,8 +15,6 @@
 		6F0C5F08183925E400EE5033 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0C5F07183925E400EE5033 /* XCTest.framework */; };
 		6F0C5F09183925E400EE5033 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0C5EF6183925E400EE5033 /* Cocoa.framework */; };
 		6F0C5F0C183925E400EE5033 /* libDemo OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F0C5EF5183925E400EE5033 /* libDemo OSX.a */; };
-		6F0C5F12183925E400EE5033 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F0C5F10183925E400EE5033 /* InfoPlist.strings */; };
-		6F0C5F14183925E400EE5033 /* AVBufferPlayerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F0C5F13183925E400EE5033 /* AVBufferPlayerTests.m */; };
 		7B91374A121844C000B14C46 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B913749121844C000B14C46 /* AVFoundation.framework */; };
 		7BB71A681684C0A90030E35B /* AVBufferPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB71A5D1684C0A90030E35B /* AVBufferPlayer.m */; };
 		7BB71A6A1684C0A90030E35B /* DemoAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BB71A621684C0A90030E35B /* DemoAppDelegate.m */; };
@@ -51,9 +49,6 @@
 		6F0C5F00183925E400EE5033 /* AVBufferPlayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVBufferPlayer.m; sourceTree = "<group>"; };
 		6F0C5F06183925E400EE5033 /* AVBufferPlayerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AVBufferPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F0C5F07183925E400EE5033 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		6F0C5F0F183925E400EE5033 /* AVBufferPlayerTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AVBufferPlayerTests-Info.plist"; sourceTree = "<group>"; };
-		6F0C5F11183925E400EE5033 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		6F0C5F13183925E400EE5033 /* AVBufferPlayerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AVBufferPlayerTests.m; sourceTree = "<group>"; };
 		7B913749121844C000B14C46 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		7BB71A5C1684C0A90030E35B /* AVBufferPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AVBufferPlayer.h; sourceTree = "<group>"; };
 		7BB71A5D1684C0A90030E35B /* AVBufferPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AVBufferPlayer.m; sourceTree = "<group>"; };
@@ -117,7 +112,6 @@
 				7BB71A5B1684C0A90030E35B /* AVBufferPlayer */,
 				7BB71A5E1684C0A90030E35B /* Demo */,
 				6F0C5EFC183925E400EE5033 /* AVBufferPlayer */,
-				6F0C5F0D183925E400EE5033 /* AVBufferPlayerTests */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -162,24 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				6F0C5EFE183925E400EE5033 /* AVBufferPlayer-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		6F0C5F0D183925E400EE5033 /* AVBufferPlayerTests */ = {
-			isa = PBXGroup;
-			children = (
-				6F0C5F13183925E400EE5033 /* AVBufferPlayerTests.m */,
-				6F0C5F0E183925E400EE5033 /* Supporting Files */,
-			);
-			path = AVBufferPlayerTests;
-			sourceTree = "<group>";
-		};
-		6F0C5F0E183925E400EE5033 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				6F0C5F0F183925E400EE5033 /* AVBufferPlayerTests-Info.plist */,
-				6F0C5F10183925E400EE5033 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -330,7 +306,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F0C5F12183925E400EE5033 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -360,7 +335,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6F0C5F14183925E400EE5033 /* AVBufferPlayerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,17 +347,6 @@
 			targetProxy = 6F0C5F0A183925E400EE5033 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		6F0C5F10183925E400EE5033 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6F0C5F11183925E400EE5033 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
